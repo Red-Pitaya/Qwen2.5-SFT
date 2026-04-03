@@ -1,0 +1,41 @@
+model_name_or_path: Qwen/Qwen2.5-0.5B
+
+stage: sft
+do_train: true
+finetuning_type: full
+
+dataset: openorca_cleaned
+dataset_dir: data
+template: qwen
+max_samples: 200000
+
+cutoff_len: 384
+
+packing: true
+
+learning_rate: 2.0e-5
+num_train_epochs: 1
+
+per_device_train_batch_size: 8
+gradient_accumulation_steps: 4
+
+warmup_steps: 100
+weight_decay: 0.01
+lr_scheduler_type: cosine
+
+optim: adamw_8bit
+
+gradient_checkpointing: true
+
+fp16: true
+
+logging_steps: 50
+save_steps: 500
+save_total_limit: 3
+
+output_dir: output/qwen05b_sft_full
+overwrite_output_dir: true
+
+preprocessing_num_workers: 2
+dataloader_num_workers: 2
+report_to: none
